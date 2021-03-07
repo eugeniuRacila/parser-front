@@ -1,0 +1,42 @@
+.product {
+    margin: 0 auto;
+    max-width: 800px;
+    width: 100%;
+}
+
+.product-overview {
+    display: flex;
+    margin-bottom: 48px;
+}
+
+.product-overview__thumbnail {
+    background-color: #ffffff;
+    border-radius: 6px;
+    height: 128px;
+    margin-right: 48px;
+    width: 128px;
+}
+
+.product-overview__image {
+    height: 100%;
+    object-fit: contain;
+    width: 100%;
+}
+
+.product-overview__name {
+    color: #000000;
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.product-overview__price-range {
+    color: #494949;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.product-overview__details {
+    font-size: 20px;
+}
+
