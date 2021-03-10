@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import SearchBar from "../SearchBar/SearchBar";
 import AlternativeShop from "../AlternativeShop/AlternativeShop";
 import mockup from "./mockup";
 

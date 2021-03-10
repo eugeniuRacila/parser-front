@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import AsyncSelect from "react-select/async";
+import axios from "axios";
 
 import data from "./mockup";
 
@@ -33,12 +34,22 @@ const SearchBar = () => {
     );
   };
 
-  const promiseOptions = (inputValue) => {
+  const promiseOptions = async (inputValue) => {
     console.log("fetching options");
+    // const result = await axios.get(
+    //   `https://localhost:5001/api/suggestions/${inputValue.toLowerCase()}`
+    // );
+
+    // return result.data();
     return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(filterColors(inputValue));
-      }, 1000);
+      axios
+        .get(
+          `https://localhost:5001/api/suggestions/${inputValue.toLowerCase()}`
+        )
+        .then((response) => {
+          console.log("fetched data", response.data);
+          return resolve(response.data);
+        });
     });
   };
 
@@ -69,7 +80,6 @@ const SearchBar = () => {
         DropdownIndicator: () => null,
         IndicatorSeparator: () => null,
       }}
-      defaultOptions
       inputValue={searchValue}
       loadingMessage={() => null}
       loadOptions={promiseOptions}
