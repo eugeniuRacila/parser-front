@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import Autosuggest from "react-autosuggest";
 import axios from "axios";
 
-import data from "./mockup";
-
+import { ReactComponent as SearchIcon } from "../../assets/icons/search.svg";
 import "./styles.css";
 
 const SearchBar = () => {
@@ -24,7 +23,7 @@ const SearchBar = () => {
     const cacheKey = inputValue.trim().toLowerCase();
 
     if (cache[cacheKey]) {
-      setSuggestions(cacheKey[cacheKey]);
+      setSuggestions(cache[cacheKey]);
     } else {
       setIsLoading(true);
 
@@ -36,7 +35,7 @@ const SearchBar = () => {
         )
         .then(({ data }) => {
           setSuggestions(data);
-          setCache((prevCache) => ({ ...prevCache, cacheKey: data }));
+          setCache((prevCache) => ({ ...prevCache, [cacheKey]: data }));
           setIsLoading(false);
         });
     }
@@ -61,14 +60,19 @@ const SearchBar = () => {
   };
 
   return (
-    <Autosuggest
-      suggestions={suggestions}
-      onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-      onSuggestionsClearRequested={onSuggestionsClearRequested}
-      getSuggestionValue={getSuggestionValue}
-      renderSuggestion={renderSuggestion}
-      inputProps={inputProps}
-    />
+    <div className="search-bar__container">
+      <div className="search-bar__icon">
+        <SearchIcon />
+      </div>
+      <Autosuggest
+        inputProps={inputProps}
+        onSuggestionsClearRequested={onSuggestionsClearRequested}
+        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+        getSuggestionValue={getSuggestionValue}
+        renderSuggestion={renderSuggestion}
+        suggestions={suggestions}
+      />
+    </div>
   );
 };
 

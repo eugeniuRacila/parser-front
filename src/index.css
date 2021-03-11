@@ -12,6 +12,10 @@ body {
   font-size: 16px;
 }
 
+input, select, textarea, button {
+  font-family:inherit;
+}
+
 #root {
   padding: 0 20px;
 }
