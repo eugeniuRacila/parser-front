@@ -8,6 +8,7 @@ const AlternativeShop = ({
   logoSrc,
   name,
   price,
+  products,
   url = "#",
 }) => {
   const [isOpened, setIsOpened] = useState(false);
@@ -18,10 +19,10 @@ const AlternativeShop = ({
         <div className="alternative-shop__logo">
           <img src={logoSrc} alt="" className="alternative-shop__logo-image" />
         </div>
-        <h2 className="alternative-shop__product-name">{name}</h2>
+        <h2 className="alternative-shop__product-name">{products[0].name}</h2>
         <div className="alternative-shop__available-volumes">
-          {availableVolumes.map(({ volume }) => (
-            <p className="alternative-shop__volume">{volume}</p>
+          {products.map(({ size }) => (
+            <p className="alternative-shop__volume">{size}</p>
           ))}
         </div>
         <button
@@ -33,10 +34,10 @@ const AlternativeShop = ({
       </div>
       <Collapse isOpened={isOpened}>
         <div className="alternative-shop__body">
-          {availableVolumes.map(({ price, volume }) => (
+          {products.map(({ name, price, size }) => (
             <div className="alternative-shop__volume-details">
               <h3 className="alternative-shop__product-name">{name}</h3>
-              <p className="alternative-shop__volume">{volume}</p>
+              <p className="alternative-shop__volume">{size}</p>
               <p className="alternative-shop__product-price">{price} kr.</p>
             </div>
           ))}

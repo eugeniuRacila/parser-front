@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import Autosuggest from "react-autosuggest";
 import axios from "axios";
+import React, { useState } from "react";
+import Autosuggest from "react-autosuggest";
+import { Link } from "react-router-dom";
 
 import { ReactComponent as SearchIcon } from "../../assets/icons/search.svg";
 import "./styles.css";
@@ -16,7 +16,7 @@ const SearchBar = () => {
 
   // Use your imagination to render suggestions.
   const renderSuggestion = (suggestion) => (
-    <Link to={`/products/${suggestion.value}`}>{suggestion.label}</Link>
+    <Link to={`/products/${suggestion.label}`}>{suggestion.label}</Link>
   );
 
   const fetchSuggestions = (inputValue) => {
@@ -61,6 +61,9 @@ const SearchBar = () => {
 
   return (
     <div className="search-bar__container">
+      {/* <p className="debug">
+        <strong>isLoading:</strong> {isLoading ? "true" : "false"}
+      </p> */}
       <div className="search-bar__icon">
         <SearchIcon />
       </div>

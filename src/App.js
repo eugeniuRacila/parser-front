@@ -12,7 +12,7 @@ function App() {
         <SearchBar />
       </div>
       <Switch>
-        <Route component={ProductPage} path="/products/:id" />
+        <Route component={ProductPage} path="/products/:name" />
       </Switch>
     </>
   );
