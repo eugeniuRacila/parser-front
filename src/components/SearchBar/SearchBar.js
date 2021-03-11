@@ -1,12 +1,13 @@
 import axios from "axios";
 import React, { useState } from "react";
 import Autosuggest from "react-autosuggest";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { ReactComponent as SearchIcon } from "../../assets/icons/search.svg";
 import "./styles.css";
 
 const SearchBar = () => {
+  let history = useHistory();
   const [cache, setCache] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
@@ -45,6 +46,10 @@ const SearchBar = () => {
     setSearchValue(newValue);
   };
 
+  const onSuggestionSelected = (event, { suggestionValue }) => {
+    history.push(`/products/${suggestionValue}`);
+  };
+
   const onSuggestionsFetchRequested = ({ value }) => {
     fetchSuggestions(value);
   };
@@ -68,6 +73,7 @@ const SearchBar = () => {
         inputProps={inputProps}
         onSuggestionsClearRequested={onSuggestionsClearRequested}
         onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+        onSuggestionSelected={onSuggestionSelected}
         getSuggestionValue={getSuggestionValue}
         renderSuggestion={renderSuggestion}
         suggestions={suggestions}
