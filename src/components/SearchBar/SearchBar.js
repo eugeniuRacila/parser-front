@@ -1,94 +1,73 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import AsyncSelect from "react-select/async";
+import { Link } from "react-router-dom";
+import Autosuggest from "react-autosuggest";
 import axios from "axios";
 
 import data from "./mockup";
 
+import "./styles.css";
+
 const SearchBar = () => {
-  let history = useHistory();
-  const [searchValue, setSearchValue] = useState();
-  const [searchSelection, setSearchSelection] = useState();
+  const [cache, setCache] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [suggestions, setSuggestions] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
 
-  const customStyles = {
-    control: (provided) => ({
-      ...provided,
-      backgroundColor: "#F9F9F9",
-      border: "none",
-      fontFamily: "Poppins",
-      height: 72,
-      paddingLeft: 24,
-      paddingRight: 24,
-    }),
-    input: (provided) => ({
-      ...provided,
-      "& input": {
-        font: "inherit",
-      },
-    }),
-  };
+  const getSuggestionValue = (suggestion) => suggestion.label;
 
-  const filterColors = (inputValue) => {
-    return data.filter((i) =>
-      i.label.toLowerCase().includes(inputValue.toLowerCase())
-    );
-  };
+  // Use your imagination to render suggestions.
+  const renderSuggestion = (suggestion) => (
+    <Link to={`/products/${suggestion.value}`}>{suggestion.label}</Link>
+  );
 
-  const promiseOptions = async (inputValue) => {
-    console.log("fetching options");
-    // const result = await axios.get(
-    //   `https://localhost:5001/api/suggestions/${inputValue.toLowerCase()}`
-    // );
+  const fetchSuggestions = (inputValue) => {
+    const cacheKey = inputValue.trim().toLowerCase();
 
-    // return result.data();
-    return new Promise((resolve) => {
+    if (cache[cacheKey]) {
+      setSuggestions(cacheKey[cacheKey]);
+    } else {
+      setIsLoading(true);
+
       axios
         .get(
-          `https://localhost:5001/api/suggestions/${inputValue.toLowerCase()}`
+          `https://localhost:5001/api/suggestions/${inputValue
+            .trim()
+            .toLowerCase()}`
         )
-        .then((response) => {
-          console.log("fetched data", response.data);
-          return resolve(response.data);
+        .then(({ data }) => {
+          setSuggestions(data);
+          setCache((prevCache) => ({ ...prevCache, cacheKey: data }));
+          setIsLoading(false);
         });
-    });
+    }
   };
 
-  const handleSearchInput = (inputValue, { action }) => {
-    if (
-      action === "menu-close" ||
-      action === "input-blur" ||
-      action === "set-value"
-    )
-      return;
-
-    console.log("inputValue", inputValue);
-
-    setSearchValue(inputValue);
+  const onChange = (event, { newValue }) => {
+    setSearchValue(newValue);
   };
 
-  const handleSearchSelection = (selectedOption) => {
-    setSearchValue(selectedOption.label);
-    setSearchSelection(selectedOption.label);
-    history.push(`/products/${selectedOption.value}`);
-    console.log("an item was selected");
+  const onSuggestionsFetchRequested = ({ value }) => {
+    fetchSuggestions(value);
+  };
+
+  const onSuggestionsClearRequested = () => {
+    setSuggestions([]);
+  };
+
+  const inputProps = {
+    placeholder: "Type product name",
+    value: searchValue,
+    onChange,
   };
 
   return (
-    <AsyncSelect
-      cacheOptions
-      components={{
-        DropdownIndicator: () => null,
-        IndicatorSeparator: () => null,
-      }}
-      inputValue={searchValue}
-      loadingMessage={() => null}
-      loadOptions={promiseOptions}
-      noOptionsMessage={(e) => (e.inputValue ? "No products found" : null)}
-      onChange={handleSearchSelection}
-      onInputChange={handleSearchInput}
-      placeholder={<div>Search for a product</div>}
-      styles={customStyles}
-      value={searchSelection}
+    <Autosuggest
+      suggestions={suggestions}
+      onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+      onSuggestionsClearRequested={onSuggestionsClearRequested}
+      getSuggestionValue={getSuggestionValue}
+      renderSuggestion={renderSuggestion}
+      inputProps={inputProps}
     />
   );
 };

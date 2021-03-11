@@ -51,9 +51,10 @@ const ProductPage = () => {
       <div className="product-prices">
         {mockup.alternativeShops.map((product) => (
           <AlternativeShop
+            availableVolumes={product.availableVolumes}
             key={product.number}
+            name={mockup.name}
             logoSrc={product.logoSrc}
-            name={product.name}
             price={product.price}
           />
         ))}
