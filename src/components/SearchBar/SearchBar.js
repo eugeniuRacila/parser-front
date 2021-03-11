@@ -61,9 +61,6 @@ const SearchBar = () => {
 
   return (
     <div className="search-bar__container">
-      {/* <p className="debug">
-        <strong>isLoading:</strong> {isLoading ? "true" : "false"}
-      </p> */}
       <div className="search-bar__icon">
         <SearchIcon />
       </div>

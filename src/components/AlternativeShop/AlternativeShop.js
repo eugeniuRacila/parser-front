@@ -17,32 +17,40 @@ const AlternativeShop = ({
     <div className="alternative-shop">
       <div className="alternative-shop__header">
         <div className="alternative-shop__logo">
-          <img src={logoSrc} alt="" className="alternative-shop__logo-image" />
+          <img
+            src={`/images/logos/${logoSrc}`}
+            alt=""
+            className="alternative-shop__logo-image"
+          />
         </div>
-        <h2 className="alternative-shop__product-name">{products[0].name}</h2>
+        <h2 className="alternative-shop__product-name">{products[0]?.name}</h2>
         <div className="alternative-shop__available-volumes">
-          {products.map(({ size }) => (
+          {products?.map(({ size }) => (
             <p className="alternative-shop__volume">{size}</p>
           ))}
         </div>
-        <button
-          className="alternative-shop__toggle"
-          onClick={() => setIsOpened(!isOpened)}
-        >
-          Toggle
-        </button>
+        {products.length > 0 && (
+          <button
+            className="alternative-shop__toggle"
+            onClick={() => setIsOpened(!isOpened)}
+          >
+            Toggle
+          </button>
+        )}
       </div>
-      <Collapse isOpened={isOpened}>
-        <div className="alternative-shop__body">
-          {products.map(({ name, price, size }) => (
-            <div className="alternative-shop__volume-details">
-              <h3 className="alternative-shop__product-name">{name}</h3>
-              <p className="alternative-shop__volume">{size}</p>
-              <p className="alternative-shop__product-price">{price} kr.</p>
-            </div>
-          ))}
-        </div>
-      </Collapse>
+      {products.length > 0 && (
+        <Collapse isOpened={isOpened}>
+          <div className="alternative-shop__body">
+            {products?.map(({ name, price, size }) => (
+              <div className="alternative-shop__volume-details">
+                <h3 className="alternative-shop__product-name">{name}</h3>
+                <p className="alternative-shop__volume">{size}</p>
+                <p className="alternative-shop__product-price">{price} kr.</p>
+              </div>
+            ))}
+          </div>
+        </Collapse>
+      )}
     </div>
   );
 };

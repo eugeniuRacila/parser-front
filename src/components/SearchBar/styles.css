@@ -71,11 +71,13 @@
 .react-autosuggest__suggestion {
     cursor: pointer;
     color: #000000;
-    padding: 10px 20px;
+
 }
 
 .react-autosuggest__suggestion a {
     color: #000000;
+    display: flex;
+    padding: 10px 20px;
     text-decoration: none;
 }
 

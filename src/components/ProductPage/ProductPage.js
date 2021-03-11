@@ -63,20 +63,32 @@ const ProductPage = () => {
         </div>
       </div>
       <div className="product-prices">
-        {data && data[shopNames[0]] && data[shopNames[0]].length > 0 && (
-          <AlternativeShop products={data[shopNames[0]]} />
+        {data && data[shopNames[0]] && (
+          <AlternativeShop
+            logoSrc={`${shopNames[0]}.png`}
+            products={data[shopNames[0]]}
+          />
         )}
 
-        {data && data[shopNames[1]] && data[shopNames[1]].length > 0 && (
-          <AlternativeShop products={data[shopNames[1]]} />
+        {data && data[shopNames[1]] && (
+          <AlternativeShop
+            logoSrc={`${shopNames[1]}.png`}
+            products={data[shopNames[1]]}
+          />
         )}
 
-        {data && data[shopNames[2]] && data[shopNames[2]].length > 0 && (
-          <AlternativeShop products={data[shopNames[2]]} />
+        {data && data[shopNames[2]] && (
+          <AlternativeShop
+            logoSrc={`${shopNames[2]}.png`}
+            products={data[shopNames[2]]}
+          />
         )}
 
-        {data && data[shopNames[3]] && data[shopNames[3]].length > 0 && (
-          <AlternativeShop products={data[shopNames[3]]} />
+        {data && data[shopNames[3]] && (
+          <AlternativeShop
+            logoSrc={`${shopNames[3]}.png`}
+            products={data[shopNames[3]]}
+          />
         )}
       </div>
     </div>
