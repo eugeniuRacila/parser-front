@@ -15,7 +15,7 @@ const shopNames = [
   "www.flugger-horsens.dk",
 ];
 
-const ProductPage = () => {
+const ProductPage = ({ token }) => {
   let { name } = useParams();
   const [data, setData] = useState();
   const [imgUrl, setImgUrl] = useState("");
@@ -41,7 +41,12 @@ const ProductPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get(
-        `https://localhost:5001/api/products/${name}`
+        `https://localhost:5001/api/products/${name}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       console.log("fetched data", result.data);
       setData(result.data);

@@ -6,7 +6,7 @@ import { Link, useHistory } from "react-router-dom";
 import { ReactComponent as SearchIcon } from "../../assets/icons/search.svg";
 import "./styles.css";
 
-const SearchBar = () => {
+const SearchBar = ({ token }) => {
   let history = useHistory();
   const [cache, setCache] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -32,7 +32,12 @@ const SearchBar = () => {
         .get(
           `https://localhost:5001/api/suggestions/${inputValue
             .trim()
-            .toLowerCase()}`
+            .toLowerCase()}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         )
         .then(({ data }) => {
           setSuggestions(data);
