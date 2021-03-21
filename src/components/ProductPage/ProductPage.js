@@ -41,7 +41,7 @@ const ProductPage = ({ token }) => {
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get(
-        `https://localhost:5001/api/products/${name}`,
+        `${process.env.REACT_APP_SERVER_URL}api/products/${name}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

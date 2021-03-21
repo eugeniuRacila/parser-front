@@ -1,0 +1,45 @@
+.authentication {
+    max-width: 400px;
+    width: 100%;
+}
+
+.authentication__form {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.authentication__input-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+}
+
+.authentication__label {
+    margin-bottom: 8px;
+}
+
+.authentication__input {
+    background-color: transparent;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    color: #000000;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    height: 42px;
+    padding: 8px 12px;
+}
+
+.authentication__input::placeholder {
+    color: rgb(192, 192, 192);
+}
+
+.authentication__submit {
+    background-color: #4f4fed;
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 12px 12px;
+}

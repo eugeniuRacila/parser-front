@@ -1,11 +1,16 @@
 import axios from "axios";
 import React, { useState } from "react";
 
+import "./styles.css";
+
 const authenticationRequest = async ({ username, password }) => {
-  return await axios.post(`http://localhost:5001/api/Authentication`, {
-    userName: username,
-    password,
-  });
+  return await axios.post(
+    `${process.env.REACT_APP_SERVER_URL}api/Authentication`,
+    {
+      userName: username,
+      password,
+    }
+  );
 };
 
 const Authentication = ({ setToken }) => {
@@ -64,7 +69,9 @@ const Authentication = ({ setToken }) => {
             type="password"
           />
         </div>
-        <button type="submit">Sign in</button>
+        <button className="authentication__submit" type="submit">
+          Sign in
+        </button>
       </form>
     </div>
   );

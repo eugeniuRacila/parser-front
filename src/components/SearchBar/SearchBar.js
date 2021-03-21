@@ -30,9 +30,9 @@ const SearchBar = ({ token }) => {
 
       axios
         .get(
-          `https://localhost:5001/api/suggestions/${inputValue
-            .trim()
-            .toLowerCase()}`,
+          `${
+            process.env.REACT_APP_SERVER_URL
+          }api/suggestions/${inputValue.trim().toLowerCase()}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

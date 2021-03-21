@@ -23,7 +23,11 @@ function App() {
   if (!token || checkIfTokenIsExpired(token)) {
     console.log("Removing token", token);
     localStorage.removeItem("token");
-    return <Authentication setToken={setToken} />;
+    return (
+      <div className="auth">
+        <Authentication setToken={setToken} />
+      </div>
+    );
   }
 
   return (
