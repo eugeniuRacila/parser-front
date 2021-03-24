@@ -18,7 +18,7 @@ const AlternativeShop = ({
       <div className="alternative-shop__header">
         <div className="alternative-shop__logo">
           <img
-            src={`/images/logos/${logoSrc}`}
+            src={`/parser-front/images/logos/${logoSrc}`}
             alt=""
             className="alternative-shop__logo-image"
           />

@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
+import useToken from "../../hooks/useToken";
 import AlternativeShop from "../AlternativeShop/AlternativeShop";
 import mockup from "./mockup";
 import data from "./realMockup";
@@ -15,11 +16,14 @@ const shopNames = [
   "www.flugger-horsens.dk",
 ];
 
-const ProductPage = ({ token }) => {
+const ProductPage = () => {
   let { name } = useParams();
   const [data, setData] = useState();
   const [imgUrl, setImgUrl] = useState("");
   const [productName, setProductName] = useState("");
+  const { token, setToken } = useToken();
+
+  console.log("ProductPage -> token", token);
 
   const findAndSetImgUrl = (data) => {
     shopNames.map((shopName) => {
@@ -70,6 +74,7 @@ const ProductPage = ({ token }) => {
       <div className="product-prices">
         {data && data[shopNames[0]] && (
           <AlternativeShop
+            key={shopNames[0]}
             logoSrc={`${shopNames[0]}.png`}
             products={data[shopNames[0]]}
           />
@@ -77,6 +82,7 @@ const ProductPage = ({ token }) => {
 
         {data && data[shopNames[1]] && (
           <AlternativeShop
+            key={shopNames[1]}
             logoSrc={`${shopNames[1]}.png`}
             products={data[shopNames[1]]}
           />
@@ -84,6 +90,7 @@ const ProductPage = ({ token }) => {
 
         {data && data[shopNames[2]] && (
           <AlternativeShop
+            key={shopNames[2]}
             logoSrc={`${shopNames[2]}.png`}
             products={data[shopNames[2]]}
           />
@@ -91,6 +98,7 @@ const ProductPage = ({ token }) => {
 
         {data && data[shopNames[3]] && (
           <AlternativeShop
+            key={shopNames[3]}
             logoSrc={`${shopNames[3]}.png`}
             products={data[shopNames[3]]}
           />

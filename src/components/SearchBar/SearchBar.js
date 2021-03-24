@@ -17,7 +17,9 @@ const SearchBar = ({ token }) => {
 
   // Use your imagination to render suggestions.
   const renderSuggestion = (suggestion) => (
-    <Link to={`/products/${suggestion.label}`}>{suggestion.label}</Link>
+    <Link to={`/parser-front/products/${suggestion.label}`}>
+      {suggestion.label}
+    </Link>
   );
 
   const fetchSuggestions = (inputValue) => {
@@ -52,7 +54,8 @@ const SearchBar = ({ token }) => {
   };
 
   const onSuggestionSelected = (event, { suggestionValue }) => {
-    history.push(`parser-front/products/${suggestionValue}`);
+    event.preventDefault();
+    history.push(`/parser-front/products/${suggestionValue}`);
   };
 
   const onSuggestionsFetchRequested = ({ value }) => {
