@@ -5,7 +5,7 @@ import "./styles.css";
 
 const authenticationRequest = async ({ username, password }) => {
   return await axios.post(
-    `${process.env.REACT_APP_SERVER_URL}api/Authentication`,
+    `${process.env.REACT_APP_SERVER_URL}api/Authenticate`,
     {
       userName: username,
       password,
