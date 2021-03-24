@@ -52,7 +52,7 @@ const SearchBar = ({ token }) => {
   };
 
   const onSuggestionSelected = (event, { suggestionValue }) => {
-    history.push(`/products/${suggestionValue}`);
+    history.push(`parser-front/products/${suggestionValue}`);
   };
 
   const onSuggestionsFetchRequested = ({ value }) => {

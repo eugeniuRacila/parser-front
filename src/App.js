@@ -36,7 +36,11 @@ function App() {
         <SearchBar token={token} />
       </div>
       <Switch>
-        <Route component={ProductPage} path="/products/:name" token={token} />
+        <Route
+          component={ProductPage}
+          path="/parser-front/products/:name"
+          token={token}
+        />
       </Switch>
     </>
   );
